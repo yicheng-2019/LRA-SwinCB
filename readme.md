@@ -1,6 +1,6 @@
 # LRA-SwinCB: Fire Anomaly Detection and Localization using Low-Rank Adaptation
 
-![Graphical Abstract](./assets/graphical_abstract.png)
+![Graphical Abstract](./assets/graphical_abstract.jpg)
 
 ## Overview
 
