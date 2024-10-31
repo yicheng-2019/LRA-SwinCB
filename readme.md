@@ -12,3 +12,9 @@ This repository contains the implementation of **LRA-SwinCB**, a fire anomaly de
 - **Gradient Filtering Algorithm**: To precisely localize fire anomalies using backward propagation gradients.
 
 
+## References Codes
+
+- [github.com/microsoft/Swin-Transformer](https://github.com/microsoft/Swin-Transformer)
+- [github.com/JamesQFreeman/LoRA-ViT](https://github.com/JamesQFreeman/LoRA-ViT)
+- [github.com/ramprs/grad-cam](https://github.com/ramprs/grad-cam)
+
