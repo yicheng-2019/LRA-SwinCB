@@ -18,3 +18,6 @@ This repository contains the implementation of **LRA-SwinCB**, a fire anomaly de
 - [github.com/JamesQFreeman/LoRA-ViT](https://github.com/JamesQFreeman/LoRA-ViT)
 - [github.com/ramprs/grad-cam](https://github.com/ramprs/grad-cam)
 
+## License 
+This project is licensed under the Apache 2.0 License, please click [LICENSE](LICENSE) for more details.
+
