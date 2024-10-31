@@ -20,22 +20,17 @@ class Cls_Boost_head(nn.Module):
 
     def forward(self, x, H, W):
 
-        B, L, C = x.shape  # Batch size, H*W, Channel
-
-        x = x.view(B, H, W, C).permute(0, 3, 1, 2)  # [B, L, C] -> [B, C, H, W]
-
-        # 空间注意力
-        x_h = self.pool_h(x)  # [B, C, H, W] -> [B, C, H, 1]
-        x_w = self.pool_w(x).permute(0, 1, 3, 2)  # [B, C, H, W] -> [B, C, W, 1]
-        hw = self.conv_1x1(torch.cat([x_h, x_w], dim=2))  # [B, C, H+W, 1]
-        x_h, x_w = torch.split(hw, [H, W], dim=2)  # [B, C， H, 1], [B, C, W, 1]
-        x_h = x_h.sigmoid()   # [B, C， H, 1]
-        x_w = x_w.permute(0, 1, 3, 2).sigmoid()  # [B, C, W, 1] -> [B, C, 1, W]
-        x = x * x_h * x_w  # [B, C， H, W] * [B, C， H, 1] * [B, C, 1, W]
-
-        # 通道注意力
-        x = self.avg_pool(x)  # [B, C, H, W] -> [B, C, 1, 1]
-        x = torch.flatten(x, 1)  # [B, C, 1, 1] -> [B, C]
+        B, L, C = x.shape
+        x = x.view(B, H, W, C).permute(0, 3, 1, 2)
+        x_h = self.pool_h(x)
+        x_w = self.pool_w(x).permute(0, 1, 3, 2)
+        hw = self.conv_1x1(torch.cat([x_h, x_w], dim=2))
+        x_h, x_w = torch.split(hw, [H, W], dim=2)
+        x_h = x_h.sigmoid()
+        x_w = x_w.permute(0, 1, 3, 2).sigmoid()
+        x = x * x_h * x_w
+        x = self.avg_pool(x)
+        x = torch.flatten(x, 1)
         y = self.ch_attn(x)
         x = x * y
         x = self.linear(x)
